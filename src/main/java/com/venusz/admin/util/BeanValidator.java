@@ -58,7 +58,7 @@ public class BeanValidator {
         /*if(map!=null && map.entrySet().size()>0){
             throw new ParamException(map.toString());
         }*/
-        if(MapUtils.isEmpty(map)){
+        if(MapUtils.isNotEmpty(map)){
             throw new ParamException(map.toString());
         }
     }

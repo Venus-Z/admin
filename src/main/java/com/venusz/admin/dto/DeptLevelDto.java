@@ -13,11 +13,12 @@ import java.util.List;
 @Setter
 @ToString
 public class DeptLevelDto extends SysDept {
-    private List<DeptLevelDto> deptLevelDtos = Lists.newArrayList();
 
-    public static DeptLevelDto addDept(SysDept sysDept){
-        DeptLevelDto deptLevelDto = new DeptLevelDto();
-        BeanUtils.copyProperties(sysDept,deptLevelDto);
-        return deptLevelDto;
+    private List<DeptLevelDto> deptList = Lists.newArrayList();
+
+    public static DeptLevelDto adapt(SysDept dept) {
+        DeptLevelDto dto = new DeptLevelDto();
+        BeanUtils.copyProperties(dept, dto);
+        return dto;
     }
 }

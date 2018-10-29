@@ -14,6 +14,12 @@
         <bean class="com.venusz.admin.common.HttpInterceptor"></bean>
     </mvc:interceptors>
 
+    <mvc:resources mapping="/js/**" location="/js/"></mvc:resources>
+    <mvc:resources mapping="/css/**" location="/css/"></mvc:resources>
+    <mvc:resources mapping="/bootstrap3.3.5/**" location="/bootstrap3.3.5/"></mvc:resources>
+    <mvc:resources mapping="/assets/**" location="/assets/"></mvc:resources>
+
+
     <context:component-scan base-package="com.venusz.admin.controller"></context:component-scan>
     <context:component-scan base-package="com.venusz.admin.service"></context:component-scan>
 
@@ -26,7 +32,7 @@
     <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"></bean>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/views/"></property>
+        <property name="prefix" value="/WEB-INF/views/"></property>
         <property name="suffix" value=".jsp"></property>
     </bean>
 </beans>

@@ -162,8 +162,8 @@
   <select id="countByNameAndParentId" parameterType="map" resultType="int">
     select count(1) from sys_dept
     where  name = #{name}
-    <if test=" parent_id!= null">
-      AND parent_id != #{parentId}
+    <if test=" parentId!= null">
+      AND parent_id = #{parentId}
     </if>
     <if test=" id!= null">
       AND id != #{id}

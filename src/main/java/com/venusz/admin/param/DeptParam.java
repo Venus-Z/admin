@@ -18,11 +18,11 @@ public class DeptParam {
     @Length(max = 15,min = 2,message ="部门名称长度为2-15位")
     private String name;
 
-    private Integer parentId;
+    private Integer parentId = 0;
 
     @NotNull(message = "展示顺序不能为空")
     private Integer seq;
 
-    @Length(max = 150,message = "备注内容控制在150以内")
+    @Length(max = 150,message = "备注内容长度控制在150以内")
     private String remark;
 }

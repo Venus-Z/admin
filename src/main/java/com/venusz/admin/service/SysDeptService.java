@@ -6,6 +6,7 @@ import com.venusz.admin.dao.SysDeptMapper;
 import com.venusz.admin.exception.ParamException;
 import com.venusz.admin.model.SysDept;
 import com.venusz.admin.param.DeptParam;
+import com.venusz.admin.util.BeanValidator;
 import com.venusz.admin.util.LevelUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,8 @@ public class SysDeptService {
     private SysDeptMapper sysDeptMapper;
 
     public void save(DeptParam deptParam){
-        if(checkIsExists(deptParam.getParentId(),deptParam.getName(),deptParam.getSeq())){
+        BeanValidator.check(deptParam);
+        if(checkIsExists(deptParam.getParentId(),deptParam.getName(),deptParam.getId())){
             throw new ParamException("同一层级下存在相同名称的部门");
         }
         SysDept sysDept = SysDept.builder().name(deptParam.getName()).parentId(deptParam.getParentId())
@@ -61,12 +63,12 @@ public class SysDeptService {
     }
 
     public void update(DeptParam deptParam) {
-        if(checkIsExists(deptParam.getParentId(),deptParam.getName(),deptParam.getSeq())){
+        if(checkIsExists(deptParam.getParentId(),deptParam.getName(),deptParam.getId())){
             throw new ParamException("同一层级下存在相同名称的部门");
         }
         SysDept before = sysDeptMapper.selectByPrimaryKey(deptParam.getId());
         Preconditions.checkNotNull(before,"待更新的部门不存在");
-        if(checkIsExists(deptParam.getParentId(),deptParam.getName(),deptParam.getSeq())){
+        if(checkIsExists(deptParam.getParentId(),deptParam.getName(),deptParam.getId())){
             throw new ParamException("同一层级下存在相同名称的部门");
         }
         SysDept after = SysDept.builder().id(deptParam.getId()).name(deptParam.getName()).parentId(deptParam.getParentId())
