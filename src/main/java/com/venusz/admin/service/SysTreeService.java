@@ -49,6 +49,7 @@ public class SysTreeService {
         }
         // 按照seq从小到大排序
         Collections.sort(rootList, new Comparator<DeptLevelDto>() {
+            @Override
             public int compare(DeptLevelDto o1, DeptLevelDto o2) {
                 return o1.getSeq() - o2.getSeq();
             }
@@ -73,7 +74,7 @@ public class SysTreeService {
                 // 排序
                 Collections.sort(tempDeptList, deptSeqComparator);
                 // 设置下一层部门
-                deptLevelDto.setDeptLevelDtos(tempDeptList);
+                deptLevelDto.setDeptList(tempDeptList);
                 // 进入到下一层处理
                 transformDeptTree(tempDeptList, nextLevel, levelDeptMap);
             }
@@ -81,6 +82,7 @@ public class SysTreeService {
     }
 
     public Comparator<DeptLevelDto> deptSeqComparator = new Comparator<DeptLevelDto>() {
+        @Override
         public int compare(DeptLevelDto o1, DeptLevelDto o2) {
             return o1.getSeq() - o2.getSeq();
         }
