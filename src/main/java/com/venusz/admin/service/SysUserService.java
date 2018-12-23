@@ -1,6 +1,9 @@
 package com.venusz.admin.service;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
+import com.venusz.admin.beans.PageQuery;
+import com.venusz.admin.beans.PageResult;
 import com.venusz.admin.dao.SysUserMapper;
 import com.venusz.admin.exception.ParamException;
 import com.venusz.admin.model.SysUser;
@@ -12,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * \* Created with IntelliJ IDEA.
@@ -82,5 +86,22 @@ public class SysUserService {
 
     public SysUser findByKeyword(String keyword) {
         return sysUserMapper.findByKeyword(keyword);
+    }
+
+    public PageResult<SysUser> getPageByDeptId(int deptId , PageQuery pageQuery){
+        BeanValidator.check(pageQuery);
+        int count = sysUserMapper.countByDeptId(deptId);
+        PageResult<SysUser> pageResult = new PageResult<>();
+        if(count > 0){
+            List<SysUser> list = sysUserMapper.getPageByDeptId(deptId,pageQuery);
+            pageResult.setTotal(count);
+            pageResult.setData(list);
+            return pageResult;
+        }
+
+        return pageResult;
+
+
+
     }
 }
